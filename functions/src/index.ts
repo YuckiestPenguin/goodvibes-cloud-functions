@@ -7,8 +7,9 @@ import {validateFirebaseIdToken} from './middleware/auth.middleware';
 
 admin.initializeApp();
 const app = express();
+app.use(validateFirebaseIdToken);
 
-app.post('/memories', validateFirebaseIdToken, addMemory);
-app.get('/memories', validateFirebaseIdToken, getAllMemories);
+app.post('/memories', addMemory);
+app.get('/memories', getAllMemories);
 
 exports.app = functions.https.onRequest(app);
