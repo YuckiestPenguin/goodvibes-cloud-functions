@@ -1,22 +1,16 @@
-import {Response} from 'express';
+import {Response, Request} from 'express';
 import * as admin from 'firebase-admin';
 
-type MemoryType = {
-  id: string,
+interface Memory {
+  id?: string,
   title: string,
   description: string,
 }
 
 
-type Request = {
-  body: MemoryType,
-  params: { entryId: string }
-}
-
-
 const addMemory = async (req: Request, res: Response): Promise<void> => {
   try {
-    const memory = req.body;
+    const memory: Memory = req.body;
 
     await admin.firestore().collection('memories').add(memory);
 
@@ -28,7 +22,7 @@ const addMemory = async (req: Request, res: Response): Promise<void> => {
 
 const getAllMemories = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const allMemories: MemoryType[] = [];
+    const allMemories: Memory[] = [];
 
     const querySnapshot = await admin.firestore().collection('memories').get();
     querySnapshot.forEach((doc: any) => {
