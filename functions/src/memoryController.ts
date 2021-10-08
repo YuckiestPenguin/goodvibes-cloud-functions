@@ -1,11 +1,6 @@
 import {Response, Request} from 'express';
 import * as admin from 'firebase-admin';
-
-interface Memory {
-  id?: string,
-  title: string,
-  description: string,
-}
+import {Memory} from './models/memory.model';
 
 
 const addMemory = async (req: Request, res: Response): Promise<void> => {
@@ -14,7 +9,7 @@ const addMemory = async (req: Request, res: Response): Promise<void> => {
 
     await admin.firestore().collection('memories').add(memory);
 
-    res.status(201).send();
+    res.status(201).json(memory);
   } catch (error) {
     res.status(500).json(error.message);
   }
