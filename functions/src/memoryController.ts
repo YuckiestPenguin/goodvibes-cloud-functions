@@ -20,7 +20,7 @@ const addMemory = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const getAllMemories = async (req: Request, res: Response): Promise<Response> => {
+const getAllMemories = async (req: Request, res: Response): Promise<void> => {
   try {
     const allMemories: Memory[] = [];
 
@@ -31,9 +31,9 @@ const getAllMemories = async (req: Request, res: Response): Promise<Response> =>
       allMemories.push({id, ...data});
     });
 
-    return res.status(200).json(allMemories);
+    res.status(200).json(allMemories);
   } catch (error) {
-    return res.status(500).json(error.message);
+    res.status(500).json(error.message);
   }
 };
 
