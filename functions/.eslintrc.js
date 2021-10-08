@@ -30,5 +30,6 @@ module.exports = {
     'max-lines': 'off',
     'max-len': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
 };
